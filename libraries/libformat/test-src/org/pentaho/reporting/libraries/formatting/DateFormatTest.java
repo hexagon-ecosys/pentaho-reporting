@@ -37,6 +37,6 @@ public class DateFormatTest {
   public void testTimeZoneIsAppliedOnPreset() {
     FastDateFormat fd =
       new FastDateFormat( DateFormat.FULL, DateFormat.FULL, Locale.ENGLISH, TimeZone.getTimeZone( "PST" ) );
-    Assert.assertEquals( "Tuesday, January 6, 2009 12:40:31 AM PST", fd.format( new Date( 1231231231000l ) ) );
+    Assert.assertEquals( "Tuesday, January 6, 2009 at 12:40:31 AM Pacific Standard Time", fd.format( new Date( 1231231231000l ) ) );
   }
 }

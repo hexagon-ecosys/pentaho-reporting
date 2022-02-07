@@ -24,6 +24,8 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -256,7 +258,7 @@ public class HSSFCellStyleProducer implements CellStyleProducer {
       if ( color == null ) {
         return null;
       }
-      final byte[] rgb = color.getRgb();
+      final byte[] rgb = color.getRGB();
       return new Color( 0xFF & rgb[0], 0xFF & rgb[1], 0xFF & rgb[2] );
     }
 
@@ -544,15 +546,15 @@ public class HSSFCellStyleProducer implements CellStyleProducer {
 
     if ( workbook instanceof XSSFWorkbook ) {
       final XSSFWorkbook xssfWorkbook = (XSSFWorkbook) workbook;
-      final short predefinedStyles = workbook.getNumCellStyles();
-      for ( short i = 0; i < predefinedStyles; i++ ) {
+      final int predefinedStyles = workbook.getNumCellStyles();
+      for ( int i = 0; i < predefinedStyles; i++ ) {
         final XSSFCellStyle cellStyleAt = xssfWorkbook.getCellStyleAt( i );
         this.styleCache.put( new HSSFCellStyleKey( cellStyleAt ), cellStyleAt );
       }
     } else {
       // Read in the styles ...
-      final short predefinedStyles = workbook.getNumCellStyles();
-      for ( short i = 0; i < predefinedStyles; i++ ) {
+      final int predefinedStyles = workbook.getNumCellStyles();
+      for ( int i = 0; i < predefinedStyles; i++ ) {
         final CellStyle cellStyleAt = workbook.getCellStyleAt( i );
         this.styleCache.put( new HSSFCellStyleKey( cellStyleAt ), cellStyleAt );
       }
@@ -610,25 +612,25 @@ public class HSSFCellStyleProducer implements CellStyleProducer {
    */
   protected static short convertAlignment( final ElementAlignment e ) {
     if ( ElementAlignment.LEFT.equals( e ) ) {
-      return HSSFCellStyle.ALIGN_LEFT;
+      return HorizontalAlignment.LEFT.getCode();
     }
     if ( ElementAlignment.RIGHT.equals( e ) ) {
-      return HSSFCellStyle.ALIGN_RIGHT;
+      return HorizontalAlignment.RIGHT.getCode();
     }
     if ( ElementAlignment.JUSTIFY.equals( e ) ) {
-      return HSSFCellStyle.ALIGN_JUSTIFY;
+      return HorizontalAlignment.JUSTIFY.getCode();
     }
     if ( ElementAlignment.CENTER.equals( e ) ) {
-      return HSSFCellStyle.ALIGN_CENTER;
+      return HorizontalAlignment.CENTER.getCode();
     }
     if ( ElementAlignment.TOP.equals( e ) ) {
-      return HSSFCellStyle.VERTICAL_TOP;
+      return VerticalAlignment.TOP.getCode();
     }
     if ( ElementAlignment.BOTTOM.equals( e ) ) {
-      return HSSFCellStyle.VERTICAL_BOTTOM;
+      return VerticalAlignment.BOTTOM.getCode();
     }
     if ( ElementAlignment.MIDDLE.equals( e ) ) {
-      return HSSFCellStyle.VERTICAL_CENTER;
+      return VerticalAlignment.CENTER.getCode();
     }
 
     throw new IllegalArgumentException( "Invalid alignment" );
@@ -643,50 +645,50 @@ public class HSSFCellStyleProducer implements CellStyleProducer {
   protected static short translateStroke( final BorderStyle borderStyle, final long widthRaw ) {
     final double width = StrictGeomUtility.toExternalValue( widthRaw );
     if ( BorderStyle.NONE.equals( borderStyle ) ) {
-      return HSSFCellStyle.BORDER_NONE;
+      return org.apache.poi.ss.usermodel.BorderStyle.NONE.getCode();
     }
     if ( BorderStyle.DASHED.equals( borderStyle ) ) {
       if ( width <= 1.5 ) {
-        return HSSFCellStyle.BORDER_DASHED;
+        return org.apache.poi.ss.usermodel.BorderStyle.DASHED.getCode();
       } else {
-        return HSSFCellStyle.BORDER_MEDIUM_DASHED;
+        return org.apache.poi.ss.usermodel.BorderStyle.MEDIUM_DASHED.getCode();
       }
     }
     if ( BorderStyle.DOT_DOT_DASH.equals( borderStyle ) ) {
       if ( width <= 1.5 ) {
-        return HSSFCellStyle.BORDER_DASH_DOT_DOT;
+        return org.apache.poi.ss.usermodel.BorderStyle.DASH_DOT_DOT.getCode();
       } else {
-        return HSSFCellStyle.BORDER_MEDIUM_DASH_DOT_DOT;
+        return org.apache.poi.ss.usermodel.BorderStyle.MEDIUM_DASH_DOT_DOT.getCode();
       }
     }
     if ( BorderStyle.DOT_DASH.equals( borderStyle ) ) {
       if ( width <= 1.5 ) {
-        return HSSFCellStyle.BORDER_DASH_DOT;
+        return org.apache.poi.ss.usermodel.BorderStyle.DASH_DOT.getCode();
       } else {
-        return HSSFCellStyle.BORDER_MEDIUM_DASH_DOT;
+        return org.apache.poi.ss.usermodel.BorderStyle.MEDIUM_DASH_DOT.getCode();
       }
     }
     if ( BorderStyle.DOTTED.equals( borderStyle ) ) {
-      return HSSFCellStyle.BORDER_DOTTED;
+      return org.apache.poi.ss.usermodel.BorderStyle.DOTTED.getCode();
     }
     if ( BorderStyle.DOUBLE.equals( borderStyle ) ) {
-      return HSSFCellStyle.BORDER_DOUBLE;
+      return org.apache.poi.ss.usermodel.BorderStyle.DOUBLE.getCode();
     }
 
     if ( width == 0 ) {
-      return HSSFCellStyle.BORDER_NONE;
+      return org.apache.poi.ss.usermodel.BorderStyle.NONE.getCode();
     } else if ( width <= 0.5 ) {
-      return HSSFCellStyle.BORDER_HAIR;
+      return org.apache.poi.ss.usermodel.BorderStyle.HAIR.getCode();
     } else if ( width <= 1 ) {
-      return HSSFCellStyle.BORDER_THIN;
+      return org.apache.poi.ss.usermodel.BorderStyle.THIN.getCode();
     } else if ( width <= 1.5 ) {
-      return HSSFCellStyle.BORDER_MEDIUM;
+      return org.apache.poi.ss.usermodel.BorderStyle.MEDIUM.getCode();
       // }
       // else if (width <= 2)
       // {
       // return HSSFCellStyle.BORDER_DOUBLE;
     } else {
-      return HSSFCellStyle.BORDER_THICK;
+      return org.apache.poi.ss.usermodel.BorderStyle.THICK.getCode();
     }
   }
 

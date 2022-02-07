@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.io.File;
+import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -71,6 +72,6 @@ public class AbstractFontFileRegistryTest {
     // we are forced to replace it manually
     actual = actual.replaceAll( "/", "\\\\" );
     // Linux also adds current dir to the path it cannot recognize, so let's check the end of the resulting path
-    assertTrue( actual, actual.endsWith( expectedFontPath ) );
+    assertTrue( actual, actual.toLowerCase(Locale.ROOT).endsWith( expectedFontPath.toLowerCase(Locale.ROOT) ) );
   }
 }

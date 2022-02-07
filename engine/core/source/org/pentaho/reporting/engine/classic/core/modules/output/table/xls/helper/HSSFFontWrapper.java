@@ -153,7 +153,7 @@ public final class HSSFFontWrapper {
 
     fontName = normalizeFontName( font.getFontName() );
     fontHeight = font.getFontHeightInPoints();
-    bold = ( font.getBoldweight() == HSSFFont.BOLDWEIGHT_BOLD );
+    bold = font.getBold();
     italic = font.getItalic();
     underline = ( font.getUnderline() != HSSFFont.U_NONE );
     strikethrough = font.getStrikeout();

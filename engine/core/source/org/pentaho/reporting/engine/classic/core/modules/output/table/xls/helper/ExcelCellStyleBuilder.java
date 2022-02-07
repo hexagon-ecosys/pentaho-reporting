@@ -17,11 +17,17 @@
 
 package org.pentaho.reporting.engine.classic.core.modules.output.table.xls.helper;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder;
 import org.pentaho.reporting.engine.classic.core.modules.output.table.base.CellBackground;
 import org.pentaho.reporting.engine.classic.core.style.BorderStyle;
@@ -36,6 +42,7 @@ import java.awt.Color;
  * Created by dima.prokopenko@gmail.com on 9/13/2016.
  */
 public class ExcelCellStyleBuilder {
+  private static final Log logger = LogFactory.getLog( ExcelCellStyleBuilder.class );
 
   private final Workbook workbook;
   private final CellStyle hssfCellStyle;
@@ -72,8 +79,24 @@ public class ExcelCellStyleBuilder {
       return;
     }
 
-    hssfCellStyle.setAlignment( styleKey.getHorizontalAlignment() );
-    hssfCellStyle.setVerticalAlignment( styleKey.getVerticalAlignment() );
+    HorizontalAlignment horizontalAlignment = HorizontalAlignment.GENERAL;
+    try {
+      horizontalAlignment = HorizontalAlignment.forInt(styleKey.getHorizontalAlignment());
+    }
+    catch (Exception e) {
+      logger.warn(e.getMessage() + " - defaulting horizontal alignment to GENERAL");
+    }
+    hssfCellStyle.setAlignment(horizontalAlignment);
+
+    VerticalAlignment verticalAlignment = VerticalAlignment.BOTTOM;
+    try {
+      verticalAlignment = VerticalAlignment.forInt(styleKey.getVerticalAlignment());
+    }
+    catch (Exception e) {
+      logger.warn(e.getMessage() + " - defaulting vertical alignment to BOTTOM");
+    }
+    hssfCellStyle.setVerticalAlignment(verticalAlignment);
+
     hssfCellStyle.setFont( workbook.getFontAt( styleKey.getFont() ) );
     hssfCellStyle.setWrapText( styleKey.isWrapText() );
     hssfCellStyle.setIndention( styleKey.getIndention() );
@@ -93,27 +116,40 @@ public class ExcelCellStyleBuilder {
     }
   }
 
+  private org.apache.poi.ss.usermodel.BorderStyle borderStyleFor(short style) {
+    org.apache.poi.ss.usermodel.BorderStyle borderStyle = org.apache.poi.ss.usermodel.BorderStyle.THIN;
+
+    try {
+      borderStyle = org.apache.poi.ss.usermodel.BorderStyle.valueOf(style);
+    }
+    catch (Exception e) {
+      logger.warn(e.getMessage() + " - defaulting border style to THIN");
+    }
+
+    return  borderStyle;
+  }
+
   // default visibility for testing purposes
   void xls_backgroundStyle( final CellBackground bg, final HSSFCellStyleProducer.HSSFCellStyleKey styleKey ) {
     if ( BorderStyle.NONE.equals( bg.getBottom().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderBottom( styleKey.getBorderStrokeBottom() );
+      hssfCellStyle.setBorderBottom( borderStyleFor(styleKey.getBorderStrokeBottom()) );
       hssfCellStyle.setBottomBorderColor( styleKey.getColorBottom() );
     }
     if ( BorderStyle.NONE.equals( bg.getTop().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderTop( styleKey.getBorderStrokeTop() );
+      hssfCellStyle.setBorderTop( borderStyleFor(styleKey.getBorderStrokeTop()) );
       hssfCellStyle.setTopBorderColor( styleKey.getColorTop() );
     }
     if ( BorderStyle.NONE.equals( bg.getLeft().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderLeft( styleKey.getBorderStrokeLeft() );
+      hssfCellStyle.setBorderLeft( borderStyleFor(styleKey.getBorderStrokeLeft()) );
       hssfCellStyle.setLeftBorderColor( styleKey.getColorLeft() );
     }
     if ( BorderStyle.NONE.equals( bg.getRight().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderRight( styleKey.getBorderStrokeRight() );
+      hssfCellStyle.setBorderRight( borderStyleFor(styleKey.getBorderStrokeRight()) );
       hssfCellStyle.setRightBorderColor( styleKey.getColorRight() );
     }
     if ( bg.getBackgroundColor() != null ) {
       hssfCellStyle.setFillForegroundColor( styleKey.getColor() );
-      hssfCellStyle.setFillPattern( HSSFCellStyle.SOLID_FOREGROUND );
+      hssfCellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );
     }
   }
 
@@ -121,28 +157,28 @@ public class ExcelCellStyleBuilder {
   void xlsx_backgroundStyle( final CellBackground bg, final HSSFCellStyleProducer.HSSFCellStyleKey styleKey ) {
     final XSSFCellStyle xssfCellStyle = (XSSFCellStyle) hssfCellStyle;
     if ( BorderStyle.NONE.equals( bg.getBottom().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderBottom( styleKey.getBorderStrokeBottom() );
+      hssfCellStyle.setBorderBottom( borderStyleFor(styleKey.getBorderStrokeBottom()) );
       xssfCellStyle.setBorderColor( XSSFCellBorder.BorderSide.BOTTOM, createXSSFColor( styleKey
         .getExtendedColorBottom() ) );
     }
     if ( BorderStyle.NONE.equals( bg.getTop().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderTop( styleKey.getBorderStrokeTop() );
+      hssfCellStyle.setBorderTop( borderStyleFor(styleKey.getBorderStrokeTop()) );
       xssfCellStyle
         .setBorderColor( XSSFCellBorder.BorderSide.TOP, createXSSFColor( styleKey.getExtendedColorTop() ) );
     }
     if ( BorderStyle.NONE.equals( bg.getLeft().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderLeft( styleKey.getBorderStrokeLeft() );
+      hssfCellStyle.setBorderLeft( borderStyleFor(styleKey.getBorderStrokeLeft()) );
       xssfCellStyle.setBorderColor( XSSFCellBorder.BorderSide.LEFT, createXSSFColor( styleKey
         .getExtendedColorLeft() ) );
     }
     if ( BorderStyle.NONE.equals( bg.getRight().getBorderStyle() ) == false ) {
-      hssfCellStyle.setBorderRight( styleKey.getBorderStrokeRight() );
+      hssfCellStyle.setBorderRight( borderStyleFor(styleKey.getBorderStrokeRight()) );
       xssfCellStyle.setBorderColor( XSSFCellBorder.BorderSide.RIGHT, createXSSFColor( styleKey
         .getExtendedColorRight() ) );
     }
     if ( bg.getBackgroundColor() != null ) {
       xssfCellStyle.setFillForegroundColor( createXSSFColor( styleKey.getExtendedColor() ) );
-      hssfCellStyle.setFillPattern( HSSFCellStyle.SOLID_FOREGROUND );
+      hssfCellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );
     }
   }
 
@@ -153,6 +189,9 @@ public class ExcelCellStyleBuilder {
   // default visibility for testing purposes
   XSSFColor createXSSFColor( final Color clr ) {
     byte[] rgb = { (byte) 255, (byte) clr.getRed(), (byte) clr.getGreen(), (byte) clr.getBlue() };
-    return new XSSFColor( rgb );
+    if (workbook instanceof XSSFWorkbook)
+      return new XSSFColor( rgb, ((XSSFWorkbook)workbook).getStylesSource().getIndexedColors());
+    else
+      return new XSSFColor( rgb, null);
   }
 }

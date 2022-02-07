@@ -108,9 +108,9 @@ public class ExcelFontFactory {
   private Font createFont( final HSSFFontWrapper wrapper ) {
     final Font font = workbook.createFont();
     if ( wrapper.isBold() ) {
-      font.setBoldweight( Font.BOLDWEIGHT_BOLD );
+      font.setBold(true);
     } else {
-      font.setBoldweight( Font.BOLDWEIGHT_NORMAL );
+      font.setBold(false);
     }
     font.setColor( wrapper.getColorIndex() );
     font.setFontName( wrapper.getFontName() );

@@ -279,7 +279,7 @@ public class ExcelImageHandler {
     anchor.setRow1( cell1y );
     anchor.setCol2( cell2x );
     anchor.setRow2( cell2y );
-    anchor.setAnchorType( ClientAnchor.MOVE_DONT_RESIZE );
+    anchor.setAnchorType( ClientAnchor.AnchorType.MOVE_DONT_RESIZE );
     return anchor;
   }
 
@@ -313,7 +313,7 @@ public class ExcelImageHandler {
     anchor.setRow1( cell1y );
     anchor.setCol2( cell2x );
     anchor.setRow2( cell2y );
-    anchor.setAnchorType( ClientAnchor.MOVE_DONT_RESIZE );
+    anchor.setAnchorType( ClientAnchor.AnchorType.MOVE_DONT_RESIZE );
     return anchor;
   }
 

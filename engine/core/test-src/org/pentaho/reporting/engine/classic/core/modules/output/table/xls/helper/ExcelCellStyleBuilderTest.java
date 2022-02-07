@@ -19,7 +19,10 @@ package org.pentaho.reporting.engine.classic.core.modules.output.table.xls.helpe
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -106,8 +109,8 @@ public class ExcelCellStyleBuilderTest {
     when( workbook.createCellStyle() ).thenReturn( xlsStyle );
     builder.withElementStyle( null, styleKey );
 
-    verify( xlsStyle, times( 0 ) ).setAlignment( anyShort() );
-    verify( xlsStyle, times( 0 ) ).setVerticalAlignment( anyShort() );
+    verify( xlsStyle, times( 0 ) ).setAlignment( HorizontalAlignment.forInt(anyShort()) );
+    verify( xlsStyle, times( 0 ) ).setVerticalAlignment( VerticalAlignment.forInt(anyShort()) );
     verify( xlsStyle, times( 0 ) ).setFont( any() );
     verify( xlsStyle, times( 0 ) ).setWrapText( anyBoolean() );
     verify( xlsStyle, times( 0 ) ).setIndention( anyShort() );
@@ -130,8 +133,8 @@ public class ExcelCellStyleBuilderTest {
 
     builder.withElementStyle( mock( StyleSheet.class ), styleKey );
 
-    verify( xlsStyle, times( 1 ) ).setAlignment( eq( (short) 13 ) );
-    verify( xlsStyle, times( 1 ) ).setVerticalAlignment( eq( (short) 14 ) );
+    verify( xlsStyle, times( 1 ) ).setAlignment( eq( HorizontalAlignment.GENERAL ) );
+    verify( xlsStyle, times( 1 ) ).setVerticalAlignment( eq( VerticalAlignment.BOTTOM ) );
     verify( xlsStyle, times( 1 ) ).setFont( any() );
     verify( xlsStyle, times( 1 ) ).setWrapText( eq( true ) );
     verify( xlsStyle, times( 1 ) ).setIndention( eq( (short) 15 ) );
@@ -187,16 +190,16 @@ public class ExcelCellStyleBuilderTest {
 
     builder.xls_backgroundStyle( bg, styleKey );
 
-    verify( xlsStyle, times( 1 ) ).setBorderBottom( eq( (short) 115 ) );
+    verify( xlsStyle, times( 1 ) ).setBorderBottom( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsStyle, times( 1 ) ).setBottomBorderColor( eq( (short) 116 ) );
-    verify( xlsStyle, times( 1 ) ).setBorderTop( eq( (short) 117 ) );
+    verify( xlsStyle, times( 1 ) ).setBorderTop( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsStyle, times( 1 ) ).setTopBorderColor( eq( (short) 118 ) );
-    verify( xlsStyle, times( 1 ) ).setBorderLeft( eq( (short) 119 ) );
+    verify( xlsStyle, times( 1 ) ).setBorderLeft( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsStyle, times( 1 ) ).setLeftBorderColor( eq( (short) 120 ) );
-    verify( xlsStyle, times( 1 ) ).setBorderRight( eq( (short) 121 ) );
+    verify( xlsStyle, times( 1 ) ).setBorderRight( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsStyle, times( 1 ) ).setRightBorderColor( eq( (short) 122 ) );
     verify( xlsStyle, times( 1 ) ).setFillForegroundColor( eq( (short) 123 ) );
-    verify( xlsStyle, times( 1 ) ).setFillPattern( eq( HSSFCellStyle.SOLID_FOREGROUND ) );
+    verify( xlsStyle, times( 1 ) ).setFillPattern( eq( FillPatternType.SOLID_FOREGROUND ) );
   }
 
   private HSSFCellStyleProducer.HSSFCellStyleKey getXlsKey() {
@@ -233,17 +236,17 @@ public class ExcelCellStyleBuilderTest {
 
     builder.withBackgroundStyle( bg, styleKey );
 
-    verify( xlsxStyle, times( 1 ) ).setBorderBottom( eq( (short) 212 ) );
+    verify( xlsxStyle, times( 1 ) ).setBorderBottom( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsxStyle, times( 1 ) )
       .setBorderColor( eq( XSSFCellBorder.BorderSide.BOTTOM ), notNull( XSSFColor.class ) );
-    verify( xlsxStyle, times( 1 ) ).setBorderTop( eq( (short) 213 ) );
+    verify( xlsxStyle, times( 1 ) ).setBorderTop( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsxStyle, times( 1 ) ).setBorderColor( eq( XSSFCellBorder.BorderSide.TOP ), notNull( XSSFColor.class ) );
-    verify( xlsxStyle, times( 1 ) ).setBorderLeft( eq( (short) 214 ) );
+    verify( xlsxStyle, times( 1 ) ).setBorderLeft( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsxStyle, times( 1 ) ).setBorderColor( eq( XSSFCellBorder.BorderSide.LEFT ), notNull( XSSFColor.class ) );
-    verify( xlsxStyle, times( 1 ) ).setBorderRight( eq( (short) 215 ) );
+    verify( xlsxStyle, times( 1 ) ).setBorderRight( eq( org.apache.poi.ss.usermodel.BorderStyle.THIN) );
     verify( xlsxStyle, times( 1 ) ).setBorderColor( eq( XSSFCellBorder.BorderSide.RIGHT ), notNull( XSSFColor.class ) );
     verify( xlsxStyle, times( 1 ) ).setFillForegroundColor( notNull( XSSFColor.class ) );
-    verify( xlsxStyle, times( 1 ) ).setFillPattern( eq( HSSFCellStyle.SOLID_FOREGROUND ) );
+    verify( xlsxStyle, times( 1 ) ).setFillPattern( eq( FillPatternType.SOLID_FOREGROUND ) );
   }
 
   private HSSFCellStyleProducer.HSSFCellStyleKey getXlsxKey() {
