@@ -46,6 +46,8 @@ public class ExcelTableModule extends AbstractModule {
   public static final String XLSX_PAGE_EXPORT_TYPE =
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=page";
 
+  public static final String XLSX_MERGE_REGIONS_VALIDATION_ENABLED = "org.pentaho.reporting.engine.classic.core.modules.output.table.xlsx.MergeRegionsValidationEnabled";
+
   /**
    * DefaultConstructor. Loads the module specification.
    *

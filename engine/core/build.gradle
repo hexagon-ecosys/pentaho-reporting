@@ -6,7 +6,7 @@ apply from: '../../../common/gradle/credentials.gradle'
 
 group = 'pentaho-reporting-engine'
 archivesBaseName = 'pentaho-reporting-engine-classic-core'
-version = '7.0-20220207'
+version = '7.0-20230313'
 
 jar {
     manifest {
@@ -41,8 +41,9 @@ repositories {
         }
     }
     maven {
-        url 'https://nexus.pentaho.org/content/groups/omni/'
-        name 'Pentaho Omni'
+        // from https://github.com/pentaho/maven-parent-poms/blob/master/maven-support-files/settings.xml
+        url 'https://repo.orl.eng.hitachivantara.com/artifactory/pnt-mvn/'
+        name 'Pentaho Public'
     }
 }
 
@@ -95,9 +96,9 @@ dependencies {
     testImplementation 'org.hsqldb:hsqldb:2.3.6'
     testImplementation 'org.slf4j:slf4j-api:1.7.35'
 
-    // from Pentaho Omni
+    // the following 2 come from Pentaho Public
     testImplementation 'pentaho:simple-jndi:1.0.10'
-    testImplementation 'org.pentaho:pentaho-encryption-support:9.3.0.0-304'
+    testImplementation 'org.pentaho:pentaho-encryption-support:9.3.0.0-424'
 
 
     testImplementation 'xmlunit:xmlunit:1.6'
