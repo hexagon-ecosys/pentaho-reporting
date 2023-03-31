@@ -19,12 +19,17 @@ package org.pentaho.reporting.engine.classic.core.modules.output.table.xls.helpe
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTMergeCell;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTMergeCells;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet;
 import org.pentaho.reporting.engine.classic.core.AttributeNames;
 import org.pentaho.reporting.engine.classic.core.DefaultImageReference;
 import org.pentaho.reporting.engine.classic.core.ImageContainer;
@@ -202,6 +207,33 @@ public class ExcelPrinter extends ExcelPrinterBase {
     }
   }
 
+  // From https://bz.apache.org/bugzilla/show_bug.cgi?id=60397
+  // https://svn.apache.org/viewvc/poi/trunk/src/ooxml/java/org/apache/poi/xssf/usermodel/XSSFSheet.java?r1=1884329&r2=1884328&pathrev=1884329&diff_format=c
+  private int addMergedRegionForXlsx(CellRangeAddress region) {
+    if (region.getNumberOfCells() < 2) {
+      throw new IllegalArgumentException("Merged region " + region.formatAsString() + " must contain 2 or more cells");
+    }
+    region.validate(SpreadsheetVersion.EXCEL2007);
+
+    CTWorksheet ctWorksheet = ((XSSFSheet)sheet).getCTWorksheet();
+    CTMergeCells ctMergeCells = ctWorksheet.isSetMergeCells() ? ctWorksheet.getMergeCells() : ctWorksheet.addNewMergeCells();
+    CTMergeCell ctMergeCell = ctMergeCells.addNewMergeCell();
+    ctMergeCell.setRef(region.formatAsString());
+
+    long count = ctMergeCells.getCount();
+
+    if (count == 0) {
+      count=ctMergeCells.sizeOfMergeCellArray();
+    } else {
+      count++;
+    }
+
+    // also adjust the number of merged regions overall
+    ctMergeCells.setCount(count);
+
+    return Math.toIntExact(count-1);
+  }
+
   private void mergeCellRegion( final TableRectangle rectangle, final int row, final int col,
       final SheetLayout sheetLayout, final LogicalPageBox logicalPage, final RenderBox content,
       final TableContentProducer contentProducer ) {
@@ -217,7 +249,7 @@ public class ExcelPrinter extends ExcelPrinterBase {
 
     Configuration configuration = getConfig();
     if ("false".equals( configuration.getConfigProperty( ExcelTableModule.XLSX_MERGE_REGIONS_VALIDATION_ENABLED ) ) ) {
-      sheet.addMergedRegionUnsafe( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );
+      addMergedRegionForXlsx( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );
     }
     else {
       sheet.addMergedRegion( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );

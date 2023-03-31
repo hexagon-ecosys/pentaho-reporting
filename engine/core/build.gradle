@@ -6,7 +6,7 @@ apply from: '../../../common/gradle/credentials.gradle'
 
 group = 'pentaho-reporting-engine'
 archivesBaseName = 'pentaho-reporting-engine-classic-core'
-version = '7.0-20230313'
+version = '7.0-20230330'
 
 jar {
     manifest {
