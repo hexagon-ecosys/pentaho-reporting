@@ -249,7 +249,12 @@ public class ExcelPrinter extends ExcelPrinterBase {
 
     Configuration configuration = getConfig();
     if ("false".equals( configuration.getConfigProperty( ExcelTableModule.XLSX_MERGE_REGIONS_VALIDATION_ENABLED ) ) ) {
-      addMergedRegionForXlsx( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );
+      if (sheet instanceof XSSFSheet) {
+        addMergedRegionForXlsx(new CellRangeAddress(row, (row + rowSpan - 1), col, (col + columnSpan - 1)));
+      }
+      else {
+        sheet.addMergedRegionUnsafe( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );
+      }
     }
     else {
       sheet.addMergedRegion( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );
