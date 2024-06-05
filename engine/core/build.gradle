@@ -98,7 +98,7 @@ dependencies {
 
     // the following 2 come from Pentaho Public
     testImplementation 'pentaho:simple-jndi:1.0.10'
-    testImplementation 'org.pentaho:pentaho-encryption-support:9.3.0.0-424'
+    testImplementation 'org.pentaho:pentaho-encryption-support:9.3.0.0-20240602.143606-24'
 
 
     testImplementation 'xmlunit:xmlunit:1.6'
