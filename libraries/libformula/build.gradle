@@ -1,12 +1,5 @@
-plugins {
-    id 'java-library'
-    id 'maven-publish'
-}
-apply from: '../../../common/gradle/credentials.gradle'
-
 group = 'pentaho-library'
 archivesBaseName = 'libformula'
-version = '7.0-20220207'
 
 jar {
     manifest {
@@ -24,82 +17,18 @@ task testJar(type: Jar, dependsOn: testClasses) {
     from sourceSets.test.output
 }
 
-// The following 2 settings are still required to set language level for IntelliJ IDEA
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-compileJava.options.encoding = 'UTF-8'
-compileJava.options.compilerArgs.addAll(['--release', '8'])
-
-configurations {
-    all {
-        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-    }
-}
-
-repositories {
-    maven {
-        url repoUrl
-        name 'EcoSys'
-        authentication {
-            basic(BasicAuthentication)
-        }
-        credentials  {
-            username = repoUsername
-            password = repoPassword
-        }
-    }
-}
-
 dependencies {
-    implementation 'pentaho-library:libbase:7.0-20220207'
-    implementation 'commons-logging:commons-logging:1.2'
+    implementation group: 'pentaho-library', name: 'libbase', version: version
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.26.0'
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'source'
-        }
-        resources {
-            srcDir 'source/resources'
-        }
-    }
-    test {
-        java {
-            srcDirs 'test-src' //, 'integration'
-        }
-        resources {
-            srcDir 'test-src/resources'
-        }
-    }
+    testImplementation group: 'junit', name: 'junit', version: junitVersion
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: hamcrestCoreVersion
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: mockitoCoreVersion
 }
 
 publishing {
-    repositories {
-        maven {
-            url repoUrl
-            name 'EcoSys'
-            authentication {
-                basic(BasicAuthentication)
-            }
-            credentials  {
-                username = repoUsername
-                password = repoPassword
-            }
-        }
-    }
     publications {
-        maven(MavenPublication) {
-            artifactId = archivesBaseName
-            from components.java
-        }
-
-        mavenTest(MavenPublication) {
-            artifactId = archivesBaseName+'-test'
+        mavenTestJava(MavenPublication) {
+            artifactId = archivesBaseName + '-test'
             artifact testJar
         }
     }

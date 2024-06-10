@@ -1,0 +1,60 @@
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply from: '../../../common/gradle/credentials.gradle' // this is from the context of the child project
+
+    repositories {
+        maven {
+            url repoUrl
+            name 'EcoSys'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = repoUsername
+                password = repoPassword
+            }
+        }
+        maven {
+            // from https://github.com/pentaho/maven-parent-poms/blob/master/maven-support-files/settings.xml
+            url 'https://repo.orl.eng.hitachivantara.com/artifactory/pnt-mvn/'
+            name 'Pentaho Public'
+        }
+    }
+
+    // so that SNAPSHOT versions are not cached locally
+    configurations {
+        all {
+            resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        }
+    }
+
+    // The following 2 settings are still required to set language level for IntelliJ IDEA
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    compileJava.options.encoding = 'UTF-8'
+    compileJava.options.compilerArgs.addAll(['--release', '17'])
+    
+    publishing {
+        repositories {
+            maven {
+                url repoUrl
+                name 'EcoSys'
+                authentication {
+                    basic(BasicAuthentication)
+                }
+                credentials  {
+                    username = repoUsername
+                    password = repoPassword
+                }
+            }
+        }
+        publications {
+            maven(MavenPublication) {
+                artifactId = archivesBaseName
+                from components.java
+            }
+        }
+    }
+}

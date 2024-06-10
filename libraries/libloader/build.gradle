@@ -1,12 +1,4 @@
-plugins {
-    id 'java-library'
-    id 'maven-publish'
-}
-apply from: '../../../common/gradle/credentials.gradle'
-
 group = 'pentaho-library'
-archivesBaseName = 'libloader'
-version = '7.0-20220207'
 
 jar {
     manifest {
@@ -15,91 +7,35 @@ jar {
     }
 }
 
-// The following 2 settings are still required to set language level for IntelliJ IDEA
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-compileJava.options.encoding = 'UTF-8'
-compileJava.options.compilerArgs.addAll(['--release', '8'])
-
-configurations {
-    all {
-        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-    }
-}
-
-repositories {
-    maven {
-        url repoUrl
-        name 'EcoSys'
-        authentication {
-            basic(BasicAuthentication)
-        }
-        credentials {
-            username = repoUsername
-            password = repoPassword
-        }
-    }
-}
-
 dependencies {
-    implementation 'pentaho-library:libbase:7.0-20220207'
-    implementation 'pentaho-library:libpixie:7.0-20220207'
+    implementation group: 'pentaho-library', name: 'libbase', version: version
+    implementation group: 'pentaho-library', name: 'libpixie', version: version
 
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-anim', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-awt-util', version: batikVersion
     implementation group: 'org.apache.xmlgraphics', name: 'batik-bridge', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-css', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-dom', version: batikVersion
     implementation group: 'org.apache.xmlgraphics', name: 'batik-ext', version: batikVersion
     implementation group: 'org.apache.xmlgraphics', name: 'batik-gui-util', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-gvt', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-parser', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-script', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-svg-dom', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-util', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-xml', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-codec', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-transcoder', version: batikVersion
     implementation group: 'org.apache.xmlgraphics', name: 'batik-constants', version: batikVersion
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-i18n', version: batikVersion
 
-    api 'org.mozilla:rhino:1.7.14'
+    api 'org.mozilla:rhino:1.7.15'
+    api 'net.sf.ehcache:ehcache-core:2.5.7'
+    implementation 'org.apache.xmlgraphics:xmlgraphics-commons:2.6'
+    implementation 'org.apache.commons:commons-vfs2:2.9.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version:commonsLang3Version
 
-    api 'net.sf.ehcache:ehcache-core:2.6.11'
-
-    implementation 'commons-logging:commons-logging:1.2'
-
-    testImplementation 'junit:junit:4.12'
-
-    testImplementation 'org.slf4j:slf4j-api:1.7.35'
-    testImplementation 'org.slf4j:slf4j-jcl:1.7.35'
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'source'
-        }
-        resources {
-            srcDir 'source/resources'
-        }
-    }
-    test {
-        java {
-            srcDirs 'test-src' //, 'integration'
-        }
-        resources {
-            srcDir 'test-src/resources'
-        }
-    }
-}
-
-publishing {
-    repositories {
-        maven {
-            url repoUrl
-            name 'EcoSys'
-            authentication {
-                basic(BasicAuthentication)
-            }
-            credentials  {
-                username = repoUsername
-                password = repoPassword
-            }
-        }
-    }
-    publications {
-        maven(MavenPublication) {
-            artifactId = archivesBaseName
-            from components.java
-        }
-    }
+    testImplementation group: 'junit', name: 'junit', version: junitVersion
+    testImplementation 'org.objenesis:objenesis:2.1'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: mockitoCoreVersion
 }

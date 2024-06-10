@@ -1,0 +1,40 @@
+rootProject.name = 'pentaho-reporting'
+
+include 'pentaho-reporting-engine-classic-core'
+project(':pentaho-reporting-engine-classic-core').projectDir = file('engine/core')
+
+include 'flute'
+project(':flute').projectDir = file('libraries/flute')
+
+include 'libbase'
+project(':libbase').projectDir = file('libraries/libbase')
+
+include 'libdocbundle'
+project(':libdocbundle').projectDir = file('libraries/libdocbundle')
+
+include 'libfonts'
+project(':libfonts').projectDir = file('libraries/libfonts')
+
+include 'libformat'
+project(':libformat').projectDir = file('libraries/libformat')
+
+include 'libformula'
+project(':libformula').projectDir = file('libraries/libformula')
+
+include 'libloader'
+project(':libloader').projectDir = file('libraries/libloader')
+
+include 'libpixie'
+project(':libpixie').projectDir = file('libraries/libpixie')
+
+include 'librepository'
+project(':librepository').projectDir = file('libraries/librepository')
+
+include 'libserializer'
+project(':libserializer').projectDir = file('libraries/libserializer')
+
+include 'libswing'
+project(':libswing').projectDir = file('libraries/libswing')
+
+include 'libxml'
+project(':libxml').projectDir = file('libraries/libxml')
