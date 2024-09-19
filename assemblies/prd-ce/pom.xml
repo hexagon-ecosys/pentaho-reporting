@@ -6,10 +6,10 @@
   <parent>
     <groupId>org.pentaho.reporting</groupId>
     <artifactId>reporting-assemblies</artifactId>
-    <version>10.2.0.0-SNAPSHOT</version>
+    <version>10.3.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>prd-ce</artifactId>
-  <version>10.2.0.0-SNAPSHOT</version>
+  <version>10.3.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Pentaho Report Designer CE Assembly</name>
   <licenses>
@@ -20,8 +20,8 @@
     </license>
   </licenses>
   <properties>
-    <pentaho-mongodb-plugin.version>10.2.0.0-SNAPSHOT</pentaho-mongodb-plugin.version>
-    <pentaho-hadoop-shims.version>10.2.0.0-SNAPSHOT</pentaho-hadoop-shims.version>
+    <pentaho-mongodb-plugin.version>10.3.0.0-SNAPSHOT</pentaho-mongodb-plugin.version>
+    <pentaho-hadoop-shims.version>10.3.0.0-SNAPSHOT</pentaho-hadoop-shims.version>
     <assembly_appendId>false</assembly_appendId>
   </properties>
 
@@ -177,16 +177,6 @@
       <artifactId>log4j-1.2-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.derby</groupId>
-      <artifactId>derby</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.derby</groupId>
-      <artifactId>derbyclient</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <scope>compile</scope>
@@ -246,6 +236,20 @@
       <groupId>pentaho-kettle</groupId>
       <artifactId>kettle-engine</artifactId>
       <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.pentaho</groupId>
@@ -339,6 +343,20 @@
       <groupId>pentaho</groupId>
       <artifactId>pentaho-metaverse-api</artifactId>
       <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.eclipse.paho</groupId>
@@ -407,7 +425,7 @@
                 <includeTypes>jar</includeTypes>
                 <includeScope>compile</includeScope>
                 <excludeArtifactIds>
-                  derby,derbyclient,h2,jaybird,jt400,LucidDbClient-minimal,sapdbc,sqlite-jdbc,pdi-dataservice-client-plugin,pentaho-metastore-locator-core,pentaho-kettle-repository-locator-core
+                  h2,jaybird,jt400,LucidDbClient-minimal,sapdbc,sqlite-jdbc,pdi-dataservice-client-plugin,pentaho-metastore-locator-core,pentaho-kettle-repository-locator-core
                 </excludeArtifactIds>
               </configuration>
             </execution>
@@ -420,7 +438,7 @@
               <configuration>
                 <outputDirectory>${stage.dir.designer}/lib/jdbc</outputDirectory>
                 <includeArtifactIds>
-                  derby,derbyclient,h2,hsqldb,infobright-core,jaybird,jt400,LucidDbClient-minimal,monetdb-jdbc,postgresql,sapdbc,sqlite-jdbc,pdi-dataservice-client-plugin
+                  h2,hsqldb,infobright-core,jaybird,jt400,LucidDbClient-minimal,monetdb-jdbc,postgresql,sapdbc,sqlite-jdbc,pdi-dataservice-client-plugin
                 </includeArtifactIds>
               </configuration>
             </execution>

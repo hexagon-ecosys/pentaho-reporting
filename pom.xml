@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.pentaho</groupId>
     <artifactId>pentaho-ce-jar-parent-pom</artifactId>
-    <version>10.2.0.0-SNAPSHOT</version>
+    <version>10.3.0.0-SNAPSHOT</version>
   </parent>
   <groupId>org.pentaho.reporting</groupId>
   <artifactId>pentaho-reporting</artifactId>
-  <version>10.2.0.0-SNAPSHOT</version>
+  <version>10.3.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Pentaho Reporting</name>
   <licenses>
@@ -30,23 +30,23 @@
   </issueManagement>
   <properties>
     <bcel.version>5.1</bcel.version>
-    <pentaho-mql-editor.version>10.2.0.0-SNAPSHOT</pentaho-mql-editor.version>
+    <pentaho-mql-editor.version>10.3.0.0-SNAPSHOT</pentaho-mql-editor.version>
     <wstx.version>3.2.4</wstx.version>
     <monetdb.version>2.8</monetdb.version>
     <plugin.enforcer.version>1.4.1</plugin.enforcer.version>
     <xalan.version>2.6.0</xalan.version>
     <ftp4che.version>0.7.1</ftp4che.version>
     <hibernate.version>3.6.9.Final</hibernate.version>
-    <groovy.version>2.4.8</groovy.version>
+    <groovy.version>2.4.21</groovy.version>
     <mockito.version>5.10.0</mockito.version>
     <powermock.version>1.6.3</powermock.version>
-    <pentaho-osgi-bundles.version>10.2.0.0-SNAPSHOT</pentaho-osgi-bundles.version>
+    <pentaho-osgi-bundles.version>10.3.0.0-SNAPSHOT</pentaho-osgi-bundles.version>
     <poi.version>5.2.5</poi.version>
     <commons-math3.version>3.6.1</commons-math3.version>
     <curvesapi.version>1.06</curvesapi.version>
     <syslo4j.version>0.9.46</syslo4j.version>
     <jersey.version>1.19.1</jersey.version>
-    <commons-database.version>10.2.0.0-SNAPSHOT</commons-database.version>
+    <commons-database.version>10.3.0.0-SNAPSHOT</commons-database.version>
     <wsdl4j.version>1.6.2</wsdl4j.version>
     <infobright.version>3.4</infobright.version>
     <mstor.version>0.9.13</mstor.version>
@@ -56,7 +56,7 @@
     <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
     <test.long>false</test.long>
     <sapdb.version>7.4.4</sapdb.version>
-    <akka.version>2.3.3</akka.version>
+    <pekko.version>1.0.3</pekko.version>
     <json-simple.version>1.1</json-simple.version>
     <jface.version>3.3.0-I20070606-0010</jface.version>
     <mimepull.version>1.9.3</mimepull.version>
@@ -64,29 +64,29 @@
     <snp4j.version>1.9.3d</snp4j.version>
     <barcode4j.version>2.0</barcode4j.version>
     <luciddb.version>0.9.4</luciddb.version>
-    <pdi-osgi-bridge.version>10.2.0.0-SNAPSHOT</pdi-osgi-bridge.version>
+    <pdi-osgi-bridge.version>10.3.0.0-SNAPSHOT</pdi-osgi-bridge.version>
     <antlr.version>3.5.2</antlr.version>
     <sqleonardo.version>2020.02</sqleonardo.version>
     <commons-validator.version>1.3.1</commons-validator.version>
-    <pentaho-metadata.version>10.2.0.0-SNAPSHOT</pentaho-metadata.version>
+    <pentaho-metadata.version>10.3.0.0-SNAPSHOT</pentaho-metadata.version>
     <pentaho.pentaho-versionchecker.version>${project.version}</pentaho.pentaho-versionchecker.version>
     <jsonpath.vesrion>1.0</jsonpath.vesrion>
     <ognl.version>2.6.9</ognl.version>
     <contiperf.version>2.2.0</contiperf.version>
     <feed4j.version>1.0</feed4j.version>
-    <launcher.version>10.2.0.0-SNAPSHOT</launcher.version>
+    <launcher.version>10.3.0.0-SNAPSHOT</launcher.version>
     <swt-linux.version>4.3.2</swt-linux.version>
     <jackcess.version>1.2.6</jackcess.version>
     <swingx.version>1.6.1</swingx.version>
-    <pentaho-karaf.version>10.2.0.0-SNAPSHOT</pentaho-karaf.version>
+    <pentaho-karaf.version>10.3.0.0-SNAPSHOT</pentaho-karaf.version>
     <commons-configuration.version>1.9</commons-configuration.version>
     <commons-collections.version>3.2.2</commons-collections.version>
     <joda.version>2.10.2</joda.version>
-    <xmlgraphics-commons.version>2.2</xmlgraphics-commons.version>
+    <xmlgraphics-commons.version>2.9</xmlgraphics-commons.version>
     <sassy.version>0.5</sassy.version>
-    <platform.version>10.2.0.0-SNAPSHOT</platform.version>
+    <platform.version>10.3.0.0-SNAPSHOT</platform.version>
     <bsf.version>2.4.0</bsf.version>
-    <pentaho-connections.version>10.2.0.0-SNAPSHOT</pentaho-connections.version>
+    <pentaho-connections.version>10.3.0.0-SNAPSHOT</pentaho-connections.version>
     <commons-lang.version>2.6</commons-lang.version>
     <xml-apis-ext.version>1.3.04</xml-apis-ext.version>
     <javax.mail.version>1.6.1</javax.mail.version>
@@ -94,23 +94,21 @@
     <plugin.sortpom.version>2.4.0</plugin.sortpom.version>
     <ehcache.version>2.10.6</ehcache.version>
     <trilead-ssh2.version>build213</trilead-ssh2.version>
-    <xmlbeans.version>5.2.0</xmlbeans.version>
-    <jettyson.version>1.2</jettyson.version>
     <ldapjdk.version>20000524</ldapjdk.version>
     <jcifs.version>1.3.3</jcifs.version>
-    <commons-xul.version>10.2.0.0-SNAPSHOT</commons-xul.version>
-    <big-data-plugin.version>10.2.0.0-SNAPSHOT</big-data-plugin.version>
+    <commons-xul.version>10.3.0.0-SNAPSHOT</commons-xul.version>
+    <big-data-plugin.version>10.3.0.0-SNAPSHOT</big-data-plugin.version>
     <avalon.version>4.1.5</avalon.version>
-    <metastore.version>10.2.0.0-SNAPSHOT</metastore.version>
+    <metastore.version>10.3.0.0-SNAPSHOT</metastore.version>
     <jxl.version>2.6.12</jxl.version>
     <stax.version>1.2.0</stax.version>
     <jug.version>2.0.0</jug.version>
     <rsyntaxtextarea.version>1.3.2</rsyntaxtextarea.version>
     <asm.version>3.2</asm.version>
-    <pdi.version>10.2.0.0-SNAPSHOT</pdi.version>
+    <pdi.version>10.3.0.0-SNAPSHOT</pdi.version>
     <edtftpj.version>2.1.0</edtftpj.version>
     <eclipse.commands.version>3.3.0-I20070605-0010</eclipse.commands.version>
-    <pdi-json-plugin.version>10.2.0.0-SNAPSHOT</pdi-json-plugin.version>
+    <pdi-json-plugin.version>10.3.0.0-SNAPSHOT</pdi-json-plugin.version>
     <license.header.file>license/templates/licenseHeader.txt</license.header.file>
     <hamcrest.version>1.3</hamcrest.version>
     <junit.version>4.13.2</junit.version>
@@ -121,10 +119,10 @@
     <equinox.version>3.3.0-v20070426</equinox.version>
     <jcommon.version>1.0.16</jcommon.version>
     <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
-    <oss-licenses.version>10.2.0.0-SNAPSHOT</oss-licenses.version>
-    <pdi-dataservice-client-plugin.version>10.2.0.0-SNAPSHOT</pdi-dataservice-client-plugin.version>
-    <mondrian.version>10.2.0.0-SNAPSHOT</mondrian.version>
-    <pdi-xml-plugin.version>10.2.0.0-SNAPSHOT</pdi-xml-plugin.version>
+    <oss-licenses.version>10.3.0.0-SNAPSHOT</oss-licenses.version>
+    <pdi-dataservice-client-plugin.version>10.3.0.0-SNAPSHOT</pdi-dataservice-client-plugin.version>
+    <mondrian.version>10.3.0.0-SNAPSHOT</mondrian.version>
+    <pdi-xml-plugin.version>10.3.0.0-SNAPSHOT</pdi-xml-plugin.version>
     <javacc-maven-plugin.version>2.6</javacc-maven-plugin.version>
     <wsdl4j-qname.version>1.6.1</wsdl4j-qname.version>
     <w3c.version>1.3</w3c.version>
@@ -147,7 +145,6 @@
     <commons-discovery.version>0.2</commons-discovery.version>
     <firebird.version>2.1.6</firebird.version>
     <commons-digester.version>1.8</commons-digester.version>
-    <axis.version>1.5</axis.version>
     <jsendnsca.version>2.0.1</jsendnsca.version>
     <barbecue.version>1.5-beta1</barbecue.version>
     <license.inception.year>2002</license.inception.year>
@@ -157,8 +154,8 @@
     <cglib.version>2.2</cglib.version>
     <jt400.version>6.1</jt400.version>
     <test.performance>false</test.performance>
-    <pentaho-metaverse.version>10.2.0.0-SNAPSHOT</pentaho-metaverse.version>
-    <encryption-support.version>10.2.0.0-SNAPSHOT</encryption-support.version>
+    <pentaho-metaverse.version>10.3.0.0-SNAPSHOT</pentaho-metaverse.version>
+    <encryption-support.version>10.3.0.0-SNAPSHOT</encryption-support.version>
     <jakarta-annotation-api.version>1.3.5</jakarta-annotation-api.version>
     <safeyaml.version>1.34.1</safeyaml.version>
     <commons-compress.version>1.26.1</commons-compress.version>
@@ -383,17 +380,6 @@
           <exclusion>
             <artifactId>*</artifactId>
             <groupId>*</groupId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-c3p0</artifactId>
-        <version>${hibernate.version}</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>c3p0</artifactId>
-            <groupId>c3p0</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -813,7 +799,7 @@
       <dependency>
         <groupId>org.codehaus.jettison</groupId>
         <artifactId>jettison</artifactId>
-        <version>${jettyson.version}</version>
+        <version>${jettison.version}</version>
         <exclusions>
           <exclusion>
             <artifactId>*</artifactId>
@@ -871,9 +857,9 @@
         <version>${swingx.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.typesafe.akka</groupId>
-        <artifactId>akka-actor_2.10</artifactId>
-        <version>${akka.version}</version>
+        <groupId>org.apache.pekko</groupId>
+        <artifactId>pekko-actor_3</artifactId>
+        <version>${pekko.version}</version>
       </dependency>
       <dependency>
         <groupId>pentaho</groupId>
@@ -950,28 +936,6 @@
         <groupId>org.eclipse.equinox</groupId>
         <artifactId>common</artifactId>
         <version>${equinox.version}</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>*</artifactId>
-            <groupId>*</groupId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
-        <version>${derby.version}</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>*</artifactId>
-            <groupId>*</groupId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derbyclient</artifactId>
-        <version>${derby.version}</version>
         <exclusions>
           <exclusion>
             <artifactId>*</artifactId>
@@ -1612,28 +1576,6 @@
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>wstx-asl</artifactId>
         <version>${wstx.version}</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>*</artifactId>
-            <groupId>*</groupId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.axis2</groupId>
-        <artifactId>axis2-adb</artifactId>
-        <version>${axis.version}</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>*</artifactId>
-            <groupId>*</groupId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.pentaho.axis2</groupId>
-        <artifactId>axis2-kernel</artifactId>
-        <version>${axis.version}</version>
         <exclusions>
           <exclusion>
             <artifactId>*</artifactId>
