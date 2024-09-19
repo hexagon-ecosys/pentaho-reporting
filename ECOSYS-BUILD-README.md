@@ -17,7 +17,8 @@
 3. Finally build 'core'
 
 ## NOTES ##
-* The latest branch for both repos is 202406-1 (indicating that master was merged in Jun 2024)
+* The latest branch for both repos is 202409-1 (indicating that master was merged in Sep 2024)
+* **Pentaho has changed licensing to BSL 1.1 as of Sep 3 2024, which essentially means we cannot refresh this going forward**
 * Look at the Git log to see which revision from master was last merged in to this branch
 * Run the unit tests for everything you build -
   * There are a few failures in 'core' that have to do with a test DB login failure ... ignore them
