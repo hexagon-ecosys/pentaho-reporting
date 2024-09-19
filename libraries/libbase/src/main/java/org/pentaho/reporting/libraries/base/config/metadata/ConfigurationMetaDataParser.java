@@ -45,7 +45,7 @@ public class ConfigurationMetaDataParser {
    */
   private static Document parseInputStream( final InputStream instream )
     throws ParserConfigurationException, SAXException, IOException {
-    final DocumentBuilderFactory dbf =XMLParserFactoryProducer.createSecureDocBuilderFactory();
+    final DocumentBuilderFactory dbf = XMLParserFactoryProducer.createSecureDocBuilderFactory();
     final DocumentBuilder db = dbf.newDocumentBuilder();
     return db.parse( new InputSource( instream ) );
   }
