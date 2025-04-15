@@ -14,12 +14,18 @@
    10. libxml
    11. libfonts
    12. libdocbundle
-3. Finally build 'core'
+3. Finally build 'core' (under 'engine')
 
 ## NOTES ##
 * The latest branch for both repos is 202409-1 (indicating that master was merged in Sep 2024)
 * **Pentaho has changed licensing to BSL 1.1 as of Sep 3 2024, which essentially means we cannot refresh this going forward**
 * Look at the Git log to see which revision from master was last merged in to this branch
 * Run the unit tests for everything you build -
-  * There are a few failures in 'core' that have to do with a test DB login failure ... ignore them
-  * There are a few minor failures in 'libformat' where the word 'at' goes missing ... ignore them
+  * There are 4 failures in 'core' that have to do with a test DB login failure ... ignore them
+      * testHandleRotatedTextTML
+      * testIsLimitReachedForNumberOfRowsGreaterQueryLimit
+      * testIsLimitReachedForNumberOfRowsLessQueryLimit
+      * testIsLimitReachedForNumberOfRowsEqualQueryLimit
+  * There are 2 minor failures in 'libformat' where the word 'at' goes missing ... ignore them
+      * DateFormatTest
+      * MessageFormatTest
